@@ -3,8 +3,8 @@ script:
   - docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
   - docker pull aimeeblue/ab-recorder-build-base
   - docker pull aimeeblue/ab-recorder-run-base
-  - docker build --cache-from aimeeblue/ab-recorder-build-base --target=ab-recorder-build-base --tag aimeeblue/ab-recorder-build-base .
-  - docker build --target ab-recorder-run-base . -t aimeeblue/ab-recorder-run-base
+  - docker build --target ab-recorder-build-base --tag aimeeblue/ab-recorder-build-base .
+  - docker build --target ab-recorder-run-base --tag aimeeblue/ab-recorder-run-base . 
 deploy:
   provider: script
   script: ./ci-push.sh
