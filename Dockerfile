@@ -85,11 +85,9 @@ RUN cd /opt/opencv-${OPENCV_VERSION} && mkdir build && cd build && \
   make -j$(nproc) && \
   make install
 
-FROM opencv-build-base as opencv-build
-
 FROM builder as ab-recorder-build-base
 
-COPY --from=opencv-build /opt/opencv-install /opt/opencv-install
+COPY --from=opencv-build-base /opt/opencv-install /opt/opencv-install
 
 ENV OPENCV4NODEJS_DISABLE_AUTOBUILD=1 \
   OPENCV_INCLUDE_DIR='/opt/opencv-install/include' \
@@ -97,6 +95,8 @@ ENV OPENCV4NODEJS_DISABLE_AUTOBUILD=1 \
   OPENCV_BIN_DIR='/opt/opencv-install/bin' \
   CC=clang \
   CXX=clang++
+
+RUN ls /opt/opencv-install
 
 FROM node:10-slim as ab-recorder-run-base
 
