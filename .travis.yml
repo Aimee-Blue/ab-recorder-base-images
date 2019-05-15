@@ -1,9 +1,9 @@
 language: minimal
 script:
-  - docker pull aimeeblue/ab-recorder-build-base
-  - docker pull aimeeblue/ab-recorder-run-base
-  - docker build --target=ab-recorder-build-base . -t aimeeblue/ab-recorder-build-base --cache-from=aimeeblue/ab-recorder-build-base
-  - docker build --target=ab-recorder-run-base . -t aimeeblue/ab-recorder-run-base --cache-from=aimeeblue/ab-recorder-run-base
+  - docker pull aimeeblue/ab-recorder-build-base:latest
+  - docker pull aimeeblue/ab-recorder-run-base:latest
+  - docker build --cache-from=aimeeblue/ab-recorder-build-base:latest --target=ab-recorder-build-base . -t aimeeblue/ab-recorder-build-base
+  - docker build --cache-from=aimeeblue/ab-recorder-run-base:latest --target=ab-recorder-run-base . -t aimeeblue/ab-recorder-run-base
 deploy:
   provider: script
   script: ./ci-push.sh 
