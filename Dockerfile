@@ -1,6 +1,6 @@
 FROM node:10 as builder
 
-ARG BUILD_DEPS='build-essential \
+ENV BUILD_DEPS='build-essential \
   unzip \
   cmake \
   clang \
@@ -14,17 +14,13 @@ ARG BUILD_DEPS='build-essential \
   libtbb-dev \
   pkg-config'
 
-ENV BUILD_DEPS=${BUILD_DEPS}
-
 RUN apt-get -qq update \
   && apt-get -qq upgrade -y --no-install-recommends \
   && apt-get -qq install -y --no-install-recommends $BUILD_DEPS
 
-FROM builder as opencv-build
+FROM builder as opencv-build-base
 
-ARG OPENCV_VERSION=3.4.6
-
-ENV OPENCV_VERSION=${OPENCV_VERSION}
+ENV OPENCV_VERSION=3.4.6
 
 # Download OpenCV
 RUN cd /opt && \
@@ -89,6 +85,8 @@ RUN cd /opt/opencv-${OPENCV_VERSION} && mkdir build && cd build && \
   make -j$(nproc) && \
   make install
 
+FROM opencv-build-base as opencv-build
+
 FROM builder as ab-recorder-build-base
 
 COPY --from=opencv-build /opt/opencv-install /opt/opencv-install
@@ -107,10 +105,9 @@ ENV OPENCV_RUNTIME_DEPS='libjpeg62-turbo \
 
 FROM node:10-slim as ab-recorder-run-base
 
-ARG RUNTIME_DEPS='v4l-utils \
-  alsa-utils'
-
-ENV RUNTIME_DEPS="${OPENCV_RUNTIME_DEPS} ${RUNTIME_DEPS}"
+ENV RUNTIME_DEPS="${OPENCV_RUNTIME_DEPS} \
+  v4l-utils \
+  alsa-utils"
 
 RUN apt-get -qq update \
   && apt-get -qq install -y --no-install-recommends $RUNTIME_DEPS \
