@@ -98,12 +98,12 @@ ENV OPENCV4NODEJS_DISABLE_AUTOBUILD=1 \
   CC=clang \
   CXX=clang++
 
+FROM node:10-slim as ab-recorder-run-base
+
 ENV OPENCV_RUNTIME_DEPS='libjpeg62-turbo \
   libpng16-16 \
   libopenblas-base \
   libtbb2'
-
-FROM node:10-slim as ab-recorder-run-base
 
 ENV RUNTIME_DEPS="${OPENCV_RUNTIME_DEPS} \
   v4l-utils \
