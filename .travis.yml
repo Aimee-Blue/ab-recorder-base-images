@@ -1,7 +1,7 @@
 language: minimal
 script:
-  - docker build --target=ab-recorder-build-base . -t aimeeblue/ab-recorder-build-base -q
-  - docker build --target=ab-recorder-run-base . -t aimeeblue/ab-recorder-run-base -q
+  - docker build --target=ab-recorder-build-base . -t aimeeblue/ab-recorder-build-base
+  - docker build --target=ab-recorder-run-base . -t aimeeblue/ab-recorder-run-base
 deploy:
   provider: script
   script: ./ci-push.sh 
