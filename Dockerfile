@@ -16,9 +16,9 @@ ARG BUILD_DEPS='build-essential \
 
 ENV BUILD_DEPS=${BUILD_DEPS}
 
-RUN apt-get update \
-  && apt-get upgrade -y --no-install-recommends \
-  && apt-get install -y --no-install-recommends $BUILD_DEPS
+RUN apt-get -qq update \
+  && apt-get -qq upgrade -y --no-install-recommends \
+  && apt-get -qq install -y --no-install-recommends $BUILD_DEPS
 
 FROM builder as opencv-build
 
@@ -28,10 +28,10 @@ ENV OPENCV_VERSION=${OPENCV_VERSION}
 
 # Download OpenCV
 RUN cd /opt && \
-  wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip && \
-  unzip ${OPENCV_VERSION}.zip && rm ${OPENCV_VERSION}.zip && \
-  wget https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.zip && \
-  unzip ${OPENCV_VERSION}.zip && rm ${OPENCV_VERSION}.zip
+  wget -q https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip && \
+  unzip -qq ${OPENCV_VERSION}.zip && rm ${OPENCV_VERSION}.zip && \
+  wget -q https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.zip && \
+  unzip -qq ${OPENCV_VERSION}.zip && rm ${OPENCV_VERSION}.zip
 
 RUN cd /opt/opencv-${OPENCV_VERSION} && mkdir build && cd build && \
   cmake -D CMAKE_BUILD_TYPE=RELEASE \
@@ -112,8 +112,8 @@ ARG RUNTIME_DEPS='v4l-utils \
 
 ENV RUNTIME_DEPS="${OPENCV_RUNTIME_DEPS} ${RUNTIME_DEPS}"
 
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends $RUNTIME_DEPS \
+RUN apt-get -qq update \
+  && apt-get -qq install -y --no-install-recommends $RUNTIME_DEPS \
   && rm -rf /var/lib/apt/lists/*
 
 COPY --from=ab-recorder-build-base /opt/opencv-install/lib* /usr/lib/
