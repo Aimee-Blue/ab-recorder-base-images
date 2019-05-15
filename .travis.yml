@@ -1,10 +1,18 @@
 language: minimal
+before_install:
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  - sudo apt-get update
+  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
 script:
+  - docker --version
   - docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
   - docker pull aimeeblue/ab-recorder-build-base
   - docker pull aimeeblue/ab-recorder-run-base
-  - docker build --target ab-recorder-build-base --tag aimeeblue/ab-recorder-build-base .
-  - docker build --target ab-recorder-run-base --tag aimeeblue/ab-recorder-run-base . 
+  - docker build --cache-from aimeeblue/ab-recorder-build-base --target=ab-recorder-build-base --tag aimeeblue/ab-recorder-build-base:new .
+  - docker build --cache-from aimeeblue/ab-recorder-build-base:new --target ab-recorder-run-base --tag aimeeblue/ab-recorder-run-base:new .
+  - docker tag aimeeblue/ab-recorder-build-base:new aimeeblue/ab-recorder-build-base:latest
+  - docker tag aimeeblue/ab-recorder-run-base:new aimeeblue/ab-recorder-run-base:latest
 deploy:
   provider: script
   script: ./ci-push.sh
