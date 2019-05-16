@@ -4,6 +4,8 @@ before_install:
   - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
   - sudo apt-get update
   - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
+env:
+  - DOCKER_BUILDKIT=1
 script:
   - docker --version
   - docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
