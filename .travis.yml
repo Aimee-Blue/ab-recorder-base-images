@@ -11,10 +11,7 @@ script:
   - docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
   - docker pull aimeeblue/ab-recorder-build-base
   - docker pull aimeeblue/ab-recorder-run-base
-  - docker build --cache-from aimeeblue/ab-recorder-build-base --target=ab-recorder-build-base --tag aimeeblue/ab-recorder-build-base:new .
-  - docker build --cache-from aimeeblue/ab-recorder-build-base:new --target ab-recorder-run-base --tag aimeeblue/ab-recorder-run-base:new .
-  - docker tag aimeeblue/ab-recorder-build-base:new aimeeblue/ab-recorder-build-base:latest
-  - docker tag aimeeblue/ab-recorder-run-base:new aimeeblue/ab-recorder-run-base:latest
+  - ./ci-build.sh
 deploy:
   provider: script
   script: ./ci-push.sh

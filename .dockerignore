@@ -1,4 +1,7 @@
-Dockerfile
-build.sh
-ci-push.sh
+.git
+.dockerignore
 .travis.yml
+*.Dockerfile
+build.sh
+ci-build.sh
+ci-push.sh

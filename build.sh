@@ -1,2 +1,6 @@
-sudo docker build --target=ab-recorder-build-base . -t aimeeblue/ab-recorder-build-base
-sudo docker build --target=ab-recorder-run-base . -t aimeeblue/ab-recorder-run-base
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  ./ci-build.sh
+else
+  # On Ubuntu/Lubuntu Linux we need sudo to run docker commands:
+  sudo ./ci-build.sh
+fi
