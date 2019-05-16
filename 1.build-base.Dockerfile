@@ -15,10 +15,9 @@ ENV BUILD_DEPS='build-essential \
   pkg-config'
 
 RUN apt-get -qq update \
-  && apt-get -qq upgrade -y --no-install-recommends \
-  && apt-get -qq install -y --no-install-recommends $BUILD_DEPS
-
-FROM builder as opencv-build-base
+  && apt-get -qq install -y --no-install-recommends $BUILD_DEPS \
+  && rm -rf /var/lib/apt/lists/* \
+  && true
 
 ENV OPENCV_VERSION=3.4.6
 
@@ -85,9 +84,10 @@ RUN cd /opt/opencv-${OPENCV_VERSION} && mkdir build && cd build && \
   make -j$(nproc) && \
   make install
 
-FROM builder as ab-recorder-build-base
-
-COPY --from=opencv-build-base /opt/opencv-install /opt/opencv-install
+RUN cd /opt \
+  && rm -rf /opt/opencv_contrib-${OPENCV_VERSION} \
+  && rm -rf /opt/opencv-${OPENCV_VERSION} \
+  && true
 
 ENV OPENCV4NODEJS_DISABLE_AUTOBUILD=1 \
   OPENCV_INCLUDE_DIR='/opt/opencv-install/include' \

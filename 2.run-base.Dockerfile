@@ -14,6 +14,8 @@ ENV RUNTIME_DEPS="${OPENCV_RUNTIME_DEPS} \
   alsa-utils"
 
 RUN apt-get -qq update \
-  && apt-get -qq install -y --no-install-recommends $RUNTIME_DEPS
+  && apt-get -qq install -y --no-install-recommends $RUNTIME_DEPS \
+  && rm -rf /var/lib/apt/lists/* \
+  && true
 
-COPY --from=aimeeblue/ab-recorder-build-base:latest /opt/opencv-install/lib* /usr/lib/
+COPY --from=aimeeblue/ab-recorder-build-base:latest /opt/opencv-install/lib/lib* /usr/lib/
