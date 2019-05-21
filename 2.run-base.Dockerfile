@@ -11,7 +11,7 @@ ENV OPENCV_RUNTIME_DEPS='libjpeg62-turbo \
 
 ENV RUNTIME_DEPS="${OPENCV_RUNTIME_DEPS} \
   v4l-utils \
-  alsa-utils  \
+  alsa-utils \
   ffmpeg"
 
 RUN apt-get -qq update \
