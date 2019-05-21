@@ -7,7 +7,8 @@ ENV OPENCV_RUNTIME_DEPS='libjpeg62-turbo \
   libwebp6 \
   libtiff5 \
   libopenexr22 \
-  libglib2.0-0'
+  libglib2.0-0 \
+  ffmpeg'
 
 ENV RUNTIME_DEPS="${OPENCV_RUNTIME_DEPS} \
   v4l-utils \
