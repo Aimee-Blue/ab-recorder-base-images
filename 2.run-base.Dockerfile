@@ -11,7 +11,9 @@ ENV OPENCV_RUNTIME_DEPS='libjpeg62-turbo \
 
 ENV RUNTIME_DEPS="${OPENCV_RUNTIME_DEPS} \
   v4l-utils \
-  alsa-utils"
+  alsa-utils  \
+  libudev-dev \
+  libusb-1.0-0-dev"
 
 ENV TESTING_DISTRIB_DEPS="ffmpeg"
 
