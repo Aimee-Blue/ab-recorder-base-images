@@ -13,7 +13,9 @@ ENV RUNTIME_DEPS="${OPENCV_RUNTIME_DEPS} \
   v4l-utils \
   alsa-utils  \
   libudev-dev \
-  libusb-1.0-0-dev"
+  libusb-1.0-0-dev \
+  udev \
+  usbutils"
 
 ENV TESTING_DISTRIB_DEPS="ffmpeg"
 
