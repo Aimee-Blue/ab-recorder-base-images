@@ -9,6 +9,7 @@ script:
   - docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
   - docker pull aimeeblue/ab-recorder-build-base
   - docker pull aimeeblue/ab-recorder-run-base
+  - docker pull aimeeblue/ab-recorder-run-base-snips || true
   - export USE_CACHE_FROM=1 && ./ci-build.sh
 deploy:
   provider: script
