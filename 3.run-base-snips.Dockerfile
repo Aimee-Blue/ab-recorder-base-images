@@ -13,11 +13,16 @@ ENV RUNTIME_DEPS="${OPENCV_RUNTIME_DEPS} \
   v4l-utils \
   alsa-utils \
   procps \
-  curl"
+  curl \
+  libudev-dev \
+  libusb-1.0-0-dev \
+  udev \
+  usbutils"
 
 ENV TZ='Australia/Sydney'
 
-ENV SNIPS_DEPS='snips-platform-voice \
+ENV SNIPS_DEPS='snips-platform-demo \
+  snips-platform-voice \
   snips-tts \
   snips-watch \
   snips-skill-server \
