@@ -31,5 +31,9 @@ echo \# 🚀 $BUILD_BASE \
   && $BUILD_RUN \
   && echo \# 🚀 $TAG_RUN \
   && $TAG_RUN \
+  && echo \# 🚀 $BUILD_SNIPS \
+  && $BUILD_SNIPS \
+  && echo \# 🚀 $TAG_SNIPS \
+  && $TAG_SNIPS \
   && echo \# ✅ - Done \
   && true
