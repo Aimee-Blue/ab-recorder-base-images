@@ -1,14 +1,17 @@
-if [[ "$USE_CACHE_FROM" == "1" ]]; then
-  CACHE_FROM_BUILD='--cache-from aimeeblue/ab-recorder-build-base:latest'
-  CACHE_FROM_RUN='--cache-from aimeeblue/ab-recorder-run-base:latest'
-  CACHE_FROM_SNIPS='--cache-from aimeeblue/ab-recorder-run-base-snips:latest'
+#!/bin/bash
+
+USE_CACHE_FROM=${USE_CACHE_FROM:-"0"}
+if [[ "$USE_CACHE_FROM" -eq '1' ]] ; then
+  CACHE_FROM_BUILD='--cache-from aimeeblue/ab-recorder-build-base:latest';
+  CACHE_FROM_RUN='--cache-from aimeeblue/ab-recorder-run-base:latest';
+  CACHE_FROM_SNIPS='--cache-from aimeeblue/ab-recorder-run-base-snips:latest';
 else
-  CACHE_FROM_BUILD=''
-  CACHE_FROM_RUN=''
-  CACHE_FROM_SNIPS=''
+  CACHE_FROM_BUILD='';
+  CACHE_FROM_RUN='';
+  CACHE_FROM_SNIPS='';
 fi
 
-echo \# Settings: 
+echo \# Settings:
 echo \# USE_CACHE_FROM'   '= $USE_CACHE_FROM '(set to 1 to use --cache-from)'
 echo \# CACHE_FROM_BUILD' '= $CACHE_FROM_BUILD
 echo \# CACHE_FROM_RUN'   '= $CACHE_FROM_RUN
