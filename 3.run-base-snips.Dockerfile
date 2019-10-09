@@ -12,6 +12,7 @@ ENV OPENCV_RUNTIME_DEPS='libjpeg62-turbo \
 ENV RUNTIME_DEPS="${OPENCV_RUNTIME_DEPS} \
   v4l-utils \
   alsa-utils \
+  pulseaudio-utils \
   procps \
   curl \
   libudev-dev \
@@ -32,8 +33,7 @@ ENV TESTING_DISTRIB_DEPS="ffmpeg"
 
 ENV CLEANUP_DEPS="curl dirmngr apt-transport-https"
 
-RUN echo 'APT::Default-Release "stable";' >> /etc/apt/apt.conf \
-  && echo 'deb http://deb.debian.org/debian testing main non-free' >> /etc/apt/sources.list \
+RUN echo 'deb http://deb.debian.org/debian testing main non-free' >> /etc/apt/sources.list \
   && echo 'deb-src http://deb.debian.org/debian testing main non-free' >> /etc/apt/sources.list \
   && apt-get -qq update \
   && apt-get -qq install -y --no-install-recommends dirmngr apt-transport-https \
