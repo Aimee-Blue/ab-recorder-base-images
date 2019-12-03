@@ -18,7 +18,8 @@ ENV RUNTIME_DEPS="${OPENCV_RUNTIME_DEPS} \
   libudev-dev \
   libusb-1.0-0-dev \
   udev \
-  usbutils"
+  usbutils \
+  zip"
 
 ENV TZ='Australia/Sydney'
 
