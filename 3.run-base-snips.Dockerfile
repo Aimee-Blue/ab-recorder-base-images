@@ -40,6 +40,7 @@ RUN echo 'deb http://deb.debian.org/debian testing main non-free' >> /etc/apt/so
   && apt-get -qq install -y --no-install-recommends dirmngr apt-transport-https \
   && bash -c  'echo "deb https://debian.snips.ai/stretch stable main" > /etc/apt/sources.list.d/snips.list' \
   && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys F727C778CCB0A455 \
+  && apt-key adv --fetch-keys  https://debian.snips.ai/5FFCD0DEB5BA45CD.pub \
   && apt-get -qq update \
   && apt-get -qq install -y $SNIPS_DEPS \
   && apt-get -qq install -y --no-install-recommends $RUNTIME_DEPS \
