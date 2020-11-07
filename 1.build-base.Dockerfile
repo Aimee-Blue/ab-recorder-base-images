@@ -1,4 +1,4 @@
-FROM node:10 as builder
+FROM node:15 as builder
 
 ENV BUILD_DEPS='build-essential \
   unzip \

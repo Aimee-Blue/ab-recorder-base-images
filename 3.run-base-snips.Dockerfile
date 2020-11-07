@@ -1,4 +1,4 @@
-FROM node:12-slim as ab-recorder-run-base-snips
+FROM node:15 as ab-recorder-run-base-snips
 
 ENV OPENCV_RUNTIME_DEPS='libjpeg62-turbo \
   libpng16-16 \
