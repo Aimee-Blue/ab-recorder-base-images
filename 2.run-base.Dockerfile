@@ -1,4 +1,4 @@
-FROM node:10-slim as ab-recorder-run-base
+FROM node:16-slim as ab-recorder-run-base
 
 ENV OPENCV_RUNTIME_DEPS='libjpeg62-turbo \
   libpng16-16 \
